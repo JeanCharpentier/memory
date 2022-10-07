@@ -17,3 +17,7 @@
     height: 30px;
     background-color: aqua;
 }
+
+.timer text {
+    text-align: center;
+}

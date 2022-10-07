@@ -85,8 +85,18 @@ function tick() {
     }else {
         requestAnimationFrame(tick);
         currentTime -= 0.016 ;
-        console.log(Math.floor(currentTime));
         timerBar.style.width = ((currentTime/maxTime)*timerBarWidth) + "px";
         timerBar.innerHTML = Math.floor(currentTime);
+
+        //$(".timer").progress((currentTime/maxTime)*timerBarWidth);
+
     }
 }
+
+/*(function ( $ ) {
+    $.fn.progress = function(pPourcent) {
+      var percent = pPourcent;
+      this.css("width", percent+"");
+      console.log(percent);
+    };
+}( jQuery ));*/
