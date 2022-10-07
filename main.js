@@ -1,7 +1,11 @@
 const grille = document.querySelector(".grille");
+const timerBar = document.querySelector(".timer");
 
 const bag = new Bag();
-const paires = 8;
+const paires = 9;
+
+const maxTime = 10;
+var currentTime = maxTime;
 
 var selectedCards = [];
 var Cards = [];
@@ -33,13 +37,15 @@ image.onload = function() {
 
         grille.appendChild(card); // On ajoute le canvas à notre page
     }
+
+    requestAnimationFrame(tick);
 }
 
 
 function flip() {
     var card = Cards[this.getAttribute("card")];
     if(selectedCards.length !=2) {
-        if(card.getState() != 2) {
+        if(card.getState() < 2) {
             selectedCards.push(this.getAttribute("card"));
             card.setState(1);
             card.drawCard(image)
@@ -58,8 +64,18 @@ function flip() {
                     selectedCards = [];
                 },
                 2000);
-    
             }
         }
+    }
+}
+
+function tick() {
+    if(currentTime <= 0) {
+        console.warn("GAME OVER !");
+    }else {
+        requestAnimationFrame(tick);
+        currentTime -= 0.016 ;
+        console.log(timerBar.clientWidth);
+        timerBar.style.width = ((maxTime*currentTime)/100)*600 + "px";
     }
 }

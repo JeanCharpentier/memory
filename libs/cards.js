@@ -12,7 +12,7 @@ class Card {
             case 0:
                 // Paire non trouvée
                 this.ctx.fillStyle = "blue";
-                this.ctx.fillRect(10,10,90,90);
+                this.ctx.fillRect(2,2,98,98);
                 break;
             case 1:
                 // Carte retournée
@@ -21,7 +21,7 @@ class Card {
             case 2:
                 // Paire trouvée
                 this.ctx.fillStyle = "orange";
-                this.ctx.fillRect(0,0,100,100);
+                this.ctx.fillRect(2,2,98,98);
                 break;
             default:
                 break;
