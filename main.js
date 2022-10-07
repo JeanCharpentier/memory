@@ -2,10 +2,14 @@ const grille = document.querySelector(".grille");
 const timerBar = document.querySelector(".timer");
 
 const bag = new Bag();
-const paires = 9;
+const paires = 6;
+var pairesTrouvees = 0
 
-const maxTime = 10;
+const maxTime = 60;
 var currentTime = maxTime;
+var canPlay = true;
+
+const timeToCheck = 2;
 
 var selectedCards = [];
 var Cards = [];
@@ -37,33 +41,37 @@ image.onload = function() {
 
         grille.appendChild(card); // On ajoute le canvas à notre page
     }
-
     requestAnimationFrame(tick);
 }
 
 
 function flip() {
-    var card = Cards[this.getAttribute("card")];
-    if(selectedCards.length !=2) {
-        if(card.getState() < 2) {
-            selectedCards.push(this.getAttribute("card"));
-            card.setState(1);
-            card.drawCard(image)
-            if(selectedCards.length == 2){
-                if(Cards[selectedCards[0]].getFruit() == Cards[selectedCards[1]].getFruit()) {
-                    //alert("GG !");
-                    Cards[selectedCards[0]].setState(2);
-                    Cards[selectedCards[1]].setState(2);
-                }else {
-                    Cards[selectedCards[0]].setState(0);
-                    Cards[selectedCards[1]].setState(0);
+    if(canPlay) {
+        var card = Cards[this.getAttribute("card")];
+        if(selectedCards.length !=2) {
+            if(card.getState() < 2) {
+                selectedCards.push(this.getAttribute("card"));
+                card.setState(1);
+                card.drawCard(image)
+                if(selectedCards.length == 2){
+                    if(Cards[selectedCards[0]].getFruit() == Cards[selectedCards[1]].getFruit()) { // Les cartes sont identiques
+                        Cards[selectedCards[0]].setState(2);
+                        Cards[selectedCards[1]].setState(2);
+                        pairesTrouvees += 1;
+                    }else { // Les cartes sont différentes
+                        Cards[selectedCards[0]].setState(0);
+                        Cards[selectedCards[1]].setState(0);
+                    }
+                    setTimeout(function clear() {
+                        Cards[selectedCards[0]].drawCard();
+                        Cards[selectedCards[1]].drawCard();
+                        selectedCards = [];
+                    },
+                    timeToCheck * 1000);
+                    if(pairesTrouvees == paires) {
+                        console.warn("BRAVO !");
+                    }
                 }
-                setTimeout(function clear() {
-                    Cards[selectedCards[0]].drawCard();
-                    Cards[selectedCards[1]].drawCard();
-                    selectedCards = [];
-                },
-                2000);
             }
         }
     }
@@ -72,10 +80,11 @@ function flip() {
 function tick() {
     if(currentTime <= 0) {
         console.warn("GAME OVER !");
+        canPlay = false;
     }else {
         requestAnimationFrame(tick);
         currentTime -= 0.016 ;
-        console.log(timerBar.clientWidth);
-        timerBar.style.width = ((maxTime*currentTime)/100)*600 + "px";
+        //console.log((currentTime/maxTime)*600);
+        timerBar.style.width = ((currentTime/maxTime)*600) + "px";
     }
 }
