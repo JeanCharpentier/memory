@@ -1,53 +1,65 @@
 const grille = document.querySelector(".grille");
 
+const bag = new Bag();
+const paires = 8;
+
+var selectedCards = [];
+var Cards = [];
+
 var image = new Image();
 image.src = "./assets/images/cards.png"; 
 
-
-const bag = new Bag();
-const paires = 18;
-
-function init(){
-    bag.fillBag(paires);
-    for(var i = 0; i < 36;i++) {
-        var card = document.createElement("canvas");
-        //card.setAttribute("id", i);
-        card.setAttribute("width",100);
-        card.setAttribute("height",100);
-
-        var ctx = card.getContext("2d");
-
-        var cardId = rnd(0,bag.lstCards.length-1);
-
-        bag.lstCards[cardId].drawCard(ctx,image);
-
-
-        console.log(cardId);
-        bag.removeBag(cardId);
-
-        grille.appendChild(card);
-    }
-
-}
 image.onload = function() {
-    bag.fillBag(paires);
-    for(var i = 0; i < 36;i++) {
+
+    bag.fillBag(paires); // Génération du sac dans lequel on va piocher les cartes aléatoirement
+
+    for(var i = 0; i < paires * 2;i++) {
         var card = document.createElement("canvas");
-        //card.setAttribute("id", i);
         card.setAttribute("width",100);
         card.setAttribute("height",100);
+        
+        card.addEventListener("click",flip);
 
-        var ctx = card.getContext("2d");
+        var cardId = rnd(0,bag.lstCards.length-1); // Numéro de la carte dans le sac
 
-        var cardId = rnd(0,bag.lstCards.length-1);
+        
+        var ctx = card.getContext("2d"); // On défini notre context 2D depuis notre carte 'card'
+       
+        Cards.push(bag.lstCards[cardId]);
+        card.setAttribute("card",i);
+        Cards[i].setCtx(ctx);
+        Cards[i].drawCard(image);
+        bag.removeBag(cardId); // On supprime cette carte du sac pour ne pas la repiocher une nouvlle fois
 
-        bag.lstCards[cardId].drawCard(ctx,image);
-
-
-        console.log(cardId);
-        bag.removeBag(cardId);
-
-        grille.appendChild(card);
+        grille.appendChild(card); // On ajoute le canvas à notre page
     }
 }
-//init();
+
+
+function flip() {
+    var card = Cards[this.getAttribute("card")];
+    if(selectedCards.length !=2) {
+        if(card.getState() != 2) {
+            selectedCards.push(this.getAttribute("card"));
+            card.setState(1);
+            card.drawCard(image)
+            if(selectedCards.length == 2){
+                if(Cards[selectedCards[0]].getFruit() == Cards[selectedCards[1]].getFruit()) {
+                    //alert("GG !");
+                    Cards[selectedCards[0]].setState(2);
+                    Cards[selectedCards[1]].setState(2);
+                }else {
+                    Cards[selectedCards[0]].setState(0);
+                    Cards[selectedCards[1]].setState(0);
+                }
+                setTimeout(function clear() {
+                    Cards[selectedCards[0]].drawCard();
+                    Cards[selectedCards[1]].drawCard();
+                    selectedCards = [];
+                },
+                2000);
+    
+            }
+        }
+    }
+}
