@@ -1,8 +1,9 @@
 const grille = document.querySelector(".grille");
 const timerBar = document.querySelector(".timer");
+const timerBarWidth = timerBar.clientWidth;
 
 const bag = new Bag();
-const paires = 6;
+const paires = 9;
 var pairesTrouvees = 0
 
 const maxTime = 60;
@@ -84,7 +85,8 @@ function tick() {
     }else {
         requestAnimationFrame(tick);
         currentTime -= 0.016 ;
-        //console.log((currentTime/maxTime)*600);
-        timerBar.style.width = ((currentTime/maxTime)*600) + "px";
+        console.log(Math.floor(currentTime));
+        timerBar.style.width = ((currentTime/maxTime)*timerBarWidth) + "px";
+        timerBar.innerHTML = Math.floor(currentTime);
     }
 }
