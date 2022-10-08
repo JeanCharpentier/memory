@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php include('./libs/php/db.php'); ?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -11,14 +12,15 @@
     <body>
         <div class="container">
             <div class="grille"></div>
-            <div class="timer" id="progressbar">
-                <div class="text"></div>
+            <div class="timer" id="progressbar"></div>
+            <div class="leaderboard">
+                <?php getBestTimes($connexion); ?>
             </div>
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="libs/cards.js"></script>
-        <script src="libs/functions.js"></script>
+        <script src="libs/js/cards.js"></script>
+        <script src="libs/js/functions.js"></script>
         <script src="main.js"></script>
     </body>
 </html>

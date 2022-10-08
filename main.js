@@ -3,14 +3,14 @@ const timerBar = document.querySelector('.timer');
 const timerBarWidth = timerBar.clientWidth;
 
 const bag = new Bag();
-const paires = 9;
+const paires = 18;
 var pairesTrouvees = 0
 
-const maxTime = 60;
+const maxTime = 120;
 var currentTime = maxTime;
 var canPlay = true;
 
-const timeToCheck = 2; // Temps de regard sur les paires
+const timeToCheck = 1; // Temps de regard sur les paires
 
 var selectedCards = [];
 var Cards = [];
@@ -41,10 +41,9 @@ image.onload = function() {
         bag.removeBag(cardId); // On supprime cette carte du sac pour ne pas la repiocher une nouvlle fois
 
         grille.appendChild(card); // On ajoute le canvas à notre page
-    }
+    }  
     requestAnimationFrame(tick);
 }
-
 
 function flip() {
     if(canPlay) {
@@ -70,7 +69,7 @@ function flip() {
                     },
                     timeToCheck * 1000);
                     if(pairesTrouvees == paires) {
-                        console.warn('BRAVO !');
+                        win(currentTime);
                     }
                 }
             }
@@ -79,17 +78,18 @@ function flip() {
 }
 
 function tick() {
-    if(currentTime <= 0) {
-        console.warn('GAME OVER !');
-        canPlay = false;
-    }else {
-        requestAnimationFrame(tick);
-        currentTime -= 0.016 ;
-        timerBar.style.width = ((currentTime/maxTime)*timerBarWidth) + "px";
-        timerBar.innerHTML = Math.ceil(currentTime);
-
-        //$(".timer").progress((currentTime/maxTime)*timerBarWidth);
-
+    if(canPlay) {
+        if(currentTime <= 0) {
+            console.warn('GAME OVER !');
+            canPlay = false;
+        }else {
+            requestAnimationFrame(tick);
+            currentTime -= 0.016 ;
+            timerBar.style.width = ((currentTime/maxTime)*timerBarWidth) + "px";
+            timerBar.innerHTML = Math.ceil(currentTime);
+    
+            //$(".timer").progress((currentTime/maxTime)*timerBarWidth);
+        }
     }
 }
 
@@ -100,3 +100,17 @@ function tick() {
       console.log(percent);
     };
 }( jQuery ));*/
+
+function win(pTime) {
+    console.warn('BRAVO !');
+    canPlay = false;
+    var setTime = maxTime - pTime;
+    jQuery.ajax({
+        type: "POST",
+        url: './libs/php/db.php',
+        data: {function: 'setNewTime', args: [setTime]}, 
+            success:function(data) {
+            //alert(data); 
+        }
+    });
+}
