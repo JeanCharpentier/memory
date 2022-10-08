@@ -1,5 +1,5 @@
-const grille = document.querySelector(".grille");
-const timerBar = document.querySelector(".timer");
+const grille = document.querySelector('.grille');
+const timerBar = document.querySelector('.timer');
 const timerBarWidth = timerBar.clientWidth;
 
 const bag = new Bag();
@@ -10,7 +10,7 @@ const maxTime = 60;
 var currentTime = maxTime;
 var canPlay = true;
 
-const timeToCheck = 2;
+const timeToCheck = 2; // Temps de regard sur les paires
 
 var selectedCards = [];
 var Cards = [];
@@ -23,19 +23,19 @@ image.onload = function() {
     bag.fillBag(paires); // Génération du sac dans lequel on va piocher les cartes aléatoirement
 
     for(var i = 0; i < paires * 2;i++) {
-        var card = document.createElement("canvas");
-        card.setAttribute("width",100);
-        card.setAttribute("height",100);
+        var card = document.createElement('canvas');
+        card.setAttribute('width',100);
+        card.setAttribute('height',100);
         
-        card.addEventListener("click",flip);
+        card.addEventListener('click',flip);
 
         var cardId = rnd(0,bag.lstCards.length-1); // Numéro de la carte dans le sac
 
         
-        var ctx = card.getContext("2d"); // On défini notre context 2D depuis notre carte 'card'
+        var ctx = card.getContext('2d'); // On défini notre context 2D depuis notre carte 'card'
        
         Cards.push(bag.lstCards[cardId]);
-        card.setAttribute("card",i);
+        card.setAttribute('card',i);
         Cards[i].setCtx(ctx);
         Cards[i].drawCard(image);
         bag.removeBag(cardId); // On supprime cette carte du sac pour ne pas la repiocher une nouvlle fois
@@ -48,10 +48,10 @@ image.onload = function() {
 
 function flip() {
     if(canPlay) {
-        var card = Cards[this.getAttribute("card")];
+        var card = Cards[this.getAttribute('card')];
         if(selectedCards.length !=2) {
             if(card.getState() < 2) {
-                selectedCards.push(this.getAttribute("card"));
+                selectedCards.push(this.getAttribute('card'));
                 card.setState(1);
                 card.drawCard(image)
                 if(selectedCards.length == 2){
@@ -70,7 +70,7 @@ function flip() {
                     },
                     timeToCheck * 1000);
                     if(pairesTrouvees == paires) {
-                        console.warn("BRAVO !");
+                        console.warn('BRAVO !');
                     }
                 }
             }
@@ -80,13 +80,13 @@ function flip() {
 
 function tick() {
     if(currentTime <= 0) {
-        console.warn("GAME OVER !");
+        console.warn('GAME OVER !');
         canPlay = false;
     }else {
         requestAnimationFrame(tick);
         currentTime -= 0.016 ;
         timerBar.style.width = ((currentTime/maxTime)*timerBarWidth) + "px";
-        timerBar.innerHTML = Math.floor(currentTime);
+        timerBar.innerHTML = Math.ceil(currentTime);
 
         //$(".timer").progress((currentTime/maxTime)*timerBarWidth);
 
