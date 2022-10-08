@@ -1,5 +1,6 @@
 const grille = document.querySelector('.grille');
 const timerBar = document.querySelector('.timer');
+const timerText = document.querySelector('.timerValue');
 const timerBarWidth = timerBar.clientWidth;
 
 const bag = new Bag();
@@ -16,7 +17,10 @@ var selectedCards = [];
 var Cards = [];
 
 var image = new Image();
-image.src = "./assets/images/cards.png"; 
+image.src = "./assets/images/cards.png";
+
+var blankCard = new Image();
+blankCard.src = "./assets/images/blank.png";
 
 image.onload = function() {
 
@@ -86,7 +90,7 @@ function tick() {
             requestAnimationFrame(tick);
             currentTime -= 0.016 ;
             timerBar.style.width = ((currentTime/maxTime)*timerBarWidth) + "px";
-            timerBar.innerHTML = Math.ceil(currentTime);
+            timerText.innerHTML = Math.ceil(currentTime);
     
             //$(".timer").progress((currentTime/maxTime)*timerBarWidth);
         }

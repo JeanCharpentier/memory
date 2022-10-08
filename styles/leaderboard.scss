@@ -14,12 +14,29 @@
     list-style: none;
     height: 30px;
     margin: 0px 10px 0px 10px;
-    border-radius: 5%;
-    border: 1px solid #ff0000;
     justify-content: center;
     align-items: center;
+    background-color: rebeccapurple;
+    color: white;
+    padding: 5px 0 5px 0;
+    border-radius: 5px;
+
+    @include mobile{
+        width: 300px;
+        height: 10px;
+        border-radius: 1px;
+    }
 }
 
 .title {
     border: 0px;
+    display: flex;
+    flex: auto;
+    list-style: none;
+    height: 30px;
+    margin: 0px 10px 0px 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0 5px 0;
+    font-weight: bold;
 }

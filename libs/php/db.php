@@ -34,7 +34,7 @@
         $sql = "SELECT time FROM times ORDER BY time ASC LIMIT 5";
         if($results = $connexion->query($sql)) {
             while($row = $results->fetch_assoc()) {
-                echo "<li>".$row["time"]." sec.</li>";
+                echo "<li>".$row["time"]."</li>";
             }
         }else {
             echo "Pas de résultats";

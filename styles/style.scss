@@ -1,3 +1,5 @@
+@import 'colors.scss';
+
 @mixin mobile {
     @media screen and (max-width: 800px) {
         @content;
@@ -8,13 +10,20 @@
 @import 'grille.scss';
 @import 'timer.scss';
 
+body {
+    background-color: $color1;
+}
 
 .container {
+    background-color: $color3;
     flex-direction: column;
-    width: 900px;
+    width: 600px;
     margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
 
     @include mobile {
-        width: 100%;
+        width: 312px;
+        padding: 5px;
     }
 }

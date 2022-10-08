@@ -24,8 +24,8 @@ class Card {
         switch(this.state) {
             case 0:
                 // Paire non trouvée
-                this.ctx.fillStyle = "blue";
-                this.ctx.fillRect(2,2,98,98);
+                this.ctx.fillStyle = "#8F5350";
+                this.ctx.fillRect(0,0,100,100);
                 break;
             case 1:
                 // La carte retournée
@@ -33,8 +33,8 @@ class Card {
                 break;
             case 2:
                 // Paire trouvée
-                this.ctx.fillStyle = "orange";
-                this.ctx.fillRect(2,2,98,98);
+                this.ctx.fillStyle = "#DBCFE6";
+                this.ctx.fillRect(0,0,100,100);
                 break;
             default:
                 break;

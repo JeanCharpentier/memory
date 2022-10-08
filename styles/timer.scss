@@ -1,11 +1,33 @@
-.timer{
-    display: flex;
-    width: 100%;
-    height: 30px;
-    margin-bottom: 30px;
-    background-color: aqua;
+.timer-wrapper {
+    background-color: $color2;
+    color: white;
+    border-radius: 5px;
+    width: 600px;
+    text-align: center;
+
+    @include mobile{
+        width: 300px;
+        /*height: 20px;*/
+    }
 }
 
-.timer text {
-    text-align: center;
+.timerValue {
+    position: relative;
+    padding: auto;
+    color: rebeccapurple;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.timer {
+    background-color: rebeccapurple;
+    color: white;
+    padding: 5px 0 5px 0;
+    border-radius: 5px;
+
+    @include mobile{
+        width: 300px;
+        height: 2px;
+        border-radius: 1px;
+    }
 }

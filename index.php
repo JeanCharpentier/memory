@@ -13,14 +13,15 @@
         <div class="container">
             <div class="leaderboard">
                 <ul>
-                    <p>Leaderboard</p>
+                    <p class="title">CLASSEMENT</p>
                     <?php getBestTimes($connexion); ?>
                 </ul>
             </div>
-            <div class="timer" id="progressbar"></div>
-            <div class="grille"></div>
-            
-            
+            <div class="timer-wrapper">
+                <div class="timerValue">test</div>
+                <div class="timer"></div>
+            </div>
+            <div class="grille"></div>            
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
