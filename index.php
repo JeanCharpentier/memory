@@ -11,11 +11,15 @@
     </head>
     <body>
         <div class="container">
+            <div class="leaderboard">
+                <ul>
+                    <p>Leaderboard</p>
+                    <?php getBestTimes($connexion); ?>
+                </ul>
+            </div>
             <div class="grille"></div>
             <div class="timer" id="progressbar"></div>
-            <div class="leaderboard">
-                <?php getBestTimes($connexion); ?>
-            </div>
+            
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

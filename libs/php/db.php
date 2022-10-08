@@ -31,10 +31,10 @@
     function getBestTimes() {
         global $connexion;
         connect();
-        $sql = "SELECT time FROM times ORDER BY time ASC LIMIT 3";
+        $sql = "SELECT time FROM times ORDER BY time ASC LIMIT 5";
         if($results = $connexion->query($sql)) {
             while($row = $results->fetch_assoc()) {
-                echo $row["time"]."<br>";
+                echo "<li>".$row["time"]." sec.</li>";
             }
         }else {
             echo "Pas de résultats";
