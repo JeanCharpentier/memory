@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Memory - Démo</title>
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./styles/style.css">
     </head>
     <body>
         <div class="container">
@@ -17,8 +17,9 @@
                     <?php getBestTimes($connexion); ?>
                 </ul>
             </div>
-            <div class="grille"></div>
             <div class="timer" id="progressbar"></div>
+            <div class="grille"></div>
+            
             
         </div>
         

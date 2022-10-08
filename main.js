@@ -6,7 +6,7 @@ const bag = new Bag();
 const paires = 18;
 var pairesTrouvees = 0
 
-const maxTime = 120;
+const maxTime = 180;
 var currentTime = maxTime;
 var canPlay = true;
 
