@@ -46,7 +46,7 @@ class Bag {
 
 
  ****************************************************
- Quelques fonctions de "Qaulity of Life" pour nous simplifier un peu la vie
+ Quelques fonctions de "Quality of Life" pour nous simplifier un peu la vie
  ****************************************************
                                                                                                                   
 */

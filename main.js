@@ -7,7 +7,7 @@
 */
 
 const paires = 18; // Nombre de paires à trouver (donc cartes = paires * 2)
-const maxTime = 10; // Temps pour résoudre le Memory
+const maxTime = 180; // Temps pour résoudre le Memory
 var currentTime = maxTime; // Initialisation du compteur de temps
 const timeToCheck = 1; // Temps de regard sur les paires, en milliseconde
 
